@@ -11,7 +11,7 @@ const initialState = {
   cartId: null
 };
 
-const reducer = (state, action) => {
+const reducer = (action) => {
   switch (action.type) {
     case "add-item-to-cart": {
       return {
@@ -34,26 +34,24 @@ export const CartProvider = ({ children }) => {
   const [cart, setCart] = useState(Cookies.get("cartId"));
 
   // Function to create new cart
-  const createNewCart = () => {
-    return fetch("/cart", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      }
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        // Set cookies for new cart if does not already exist
-        Cookies.set("cartId", `${data.data.insertedId}`, { expires: 7 });
-        setCart(Cookies.get("cartId"));
-
-        return data.data.insertedId;
-      })
-      .catch((error) => {
-        console.log(error);
-        return;
+  const createNewCart = async () => {
+    try {
+      const res = await fetch("/cart", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        }
       });
+      const data = await res.json();
+      // Set cookies for new cart if does not already exist
+      Cookies.set("cartId", `${data.data.insertedId}`, { expires: 7 });
+      setCart(Cookies.get("cartId"));
+      return data.data.insertedId;
+    } catch (error) {
+      console.log(error);
+      return;
+    }
   };
 
   // Function to add item to cart
@@ -74,7 +72,7 @@ export const CartProvider = ({ children }) => {
       },
     })
       .then((res) => res.json())
-      .then((data) => {
+      .then(() => {
         Cookies.remove("cartId");
         setCart(null);
       })

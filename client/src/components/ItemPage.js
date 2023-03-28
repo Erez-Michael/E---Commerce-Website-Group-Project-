@@ -23,7 +23,7 @@ const ItemPage = () => {
   // GET Item information based on item id
   useEffect(() => {
     companies &&
-    fetch(`/item/${id}`)
+      fetch(`/item/${id}`)
       .then((res) => res.json())
       .then((data) => {
         // Set Company Name

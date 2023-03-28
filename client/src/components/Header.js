@@ -33,7 +33,6 @@ const Header = ({ setEmail, setPassword }) => {
             <CartDivSignedIn id="cartDiv">
               <NavigationLink className="Cart" to="/cart" end>
                 <ThemifyIcons.TfiShoppingCart />
-                <Cart> Cart</Cart>
               </NavigationLink>
                 <NavigationLink to={`/orders/${signedIn._id}`} end>Order History</NavigationLink>
             </CartDivSignedIn>
@@ -44,7 +43,6 @@ const Header = ({ setEmail, setPassword }) => {
               <CartDiv id="cartDiv">
                 <NavigationLink className="Cart" to="/cart" end>
                   <ThemifyIcons.TfiShoppingCart />
-                  <Cart> Cart</Cart>
                 </NavigationLink>
               </CartDiv>
           </>
@@ -65,14 +63,14 @@ const Wrapper = styled.div`
 `;
 
 const NavigationLink = styled(NavLink)`
+  color: var(--color-turquoise);
   text-decoration: none;
-  color: var(--color-dark-grey);
   font-size: 1.2rem;
   display: flex;
   align-items: center;
-
+  
   &:hover {
-    color: var(--color-turquoise);
+    color: var(--color-dark-grey);
   }
 
   &.active {
@@ -80,17 +78,7 @@ const NavigationLink = styled(NavLink)`
   }
 `;
 
-const Cart = styled.span`
-  font-size: 1.2rem;
 
-  &:hover {
-    color: var(--color-turquoise);
-  }
-
-  &.active {
-    color: var(--color-turquoise);
-  }
-`;
 const CartDiv = styled.div`
   display: flex;
   margin-left: 50px;
@@ -122,12 +110,12 @@ const SignedInUser = styled.div`
 
 const NavigationLinkSignIn = styled(NavLink)`
   text-decoration: none;
-  color: var(--color-dark-grey);
   display: flex;
   align-items: center;
-
+  color: var(--color-turquoise);
+  
   &:hover {
-    color: var(--color-turquoise);
+    color: var(--color-dark-grey);
   }
 
   &.active {
@@ -143,13 +131,13 @@ const SignOut = styled.button`
   border: none;
   justify-content: flex-start;
   background-color: var(--color-dark-turquoise);
-  color: var(--color-dark-grey);
+  color: var(--color-turquoise);
   font-size: 1rem;
   padding: 0;
   cursor: pointer;
-
+  
   &:hover {
-    color: var(--color-turquoise);
+    color: var(--color-dark-grey);
   }
 `;
 export default Header;
